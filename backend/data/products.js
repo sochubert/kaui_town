@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: "1",
     name: "Grandma's Cookies Variety Pack of 30",
     image: "/images/cookie.jpg",
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 4,
   },
   {
-    _id: "2",
     name: "Sugar-Free Pre-Workout Energy Supplement Drink",
     image: "/images/vitamin.jpg",
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "3",
     name: "Welch's Fruit Snacks, Mixed Fruit,",
     image: "/images/snack.jpg",
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 3,
   },
   {
-    _id: "4",
     name: "Rao's Homemade Marinara Sauce, 24 oz, All Purpose Tomato Sauce",
     image: "/images/sauce.jpg",
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 6,
   },
   {
-    _id: "5",
     name: "Spam Classic, 12 Ounce Can (Pack of 12)",
     image: "/images/spam.jpg",
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 7,
   },
   {
-    _id: "6",
     name: "China Good Food 量贩装China instant noodles（康师傅 经典鲜虾鱼板面 5 bags）",
     image: "/images/china.jpg",
     description:

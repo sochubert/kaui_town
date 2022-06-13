@@ -1,0 +1,40 @@
+{
+  "name": "kaui_town",
+  "version": "1.0.0",
+  "description": "Heading Warm Second Project, E-Commerce Application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sochubert/kaui_town.git"
+  },
+  "author": "Minjae Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sochubert/kaui_town/issues"
+  },
+  "homepage": "https://github.com/sochubert/kaui_town#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.3.6",
+    "react-bootstrap": "^2.4.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.1",
+    "nodemon": "^2.0.16"
+  }
+}
