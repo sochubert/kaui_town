@@ -34,7 +34,11 @@ const PaymentScreen = ({ history }) => {
             <Form.Check
               type="radio"
               label="转账"
+<<<<<<< HEAD
               id="转账"
+=======
+              id="PayPal"
+>>>>>>> 329d3b6 (Chinese)
               name="paymentMethod"
               value="转账"
               checked
