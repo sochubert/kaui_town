@@ -26,14 +26,14 @@ const PaymentScreen = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
-      <h1>Payment Method</h1>
+      <h1>付款方式</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group>
-          <Form.Label as="legend">Select Method</Form.Label>
+          <Form.Label as="legend">选择方式</Form.Label>
           <Col>
             <Form.Check
               type="radio"
-              label="PayPal or Credit Card"
+              label="转账"
               id="PayPal"
               name="paymentMethod"
               value="PayPal"

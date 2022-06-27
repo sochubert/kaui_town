@@ -38,61 +38,61 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1>注册</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>姓名</Form.Label>
           <Form.Control
             type="name"
-            placeholder="Enter Name"
+            placeholder="输入姓名"
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>邮箱地址</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enter email"
+            placeholder="输入邮箱"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>密码</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter password"
+            placeholder="输入密码"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>确认密码</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Confirm password"
+            placeholder="确认密码"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Button type="submit" variant="primary">
-          Register
+          注册
         </Button>
       </Form>
 
       <Row className="py-3">
         <Col>
-          Have an Account?{" "}
+          有账户?{" "}
           <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Login
+            登录
           </Link>
         </Col>
       </Row>

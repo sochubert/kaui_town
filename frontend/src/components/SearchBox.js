@@ -19,10 +19,10 @@ const SearchBox = ({ history }) => {
         type="text"
         name="q"
         onChange={(e) => setKeyword(e.target.value)}
-        placeholder="Search Products..."
+        placeholder="搜索产品"
       ></Form.Control>
       <Button type="submit" variant="primary" className="p-2">
-        Search
+        查询
       </Button>
     </Form>
   );

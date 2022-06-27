@@ -56,14 +56,14 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <Row>
       <Col md={3}>
-        <h2>User Profile</h2>
+        <h2>账户信息</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
         {success && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>姓名</Form.Label>
             <Form.Control
               type="name"
               placeholder="Enter Name"
@@ -73,7 +73,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Form.Group controlId="email">
-            <Form.Label>Email Address</Form.Label>
+            <Form.Label>邮箱地址</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -83,7 +83,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>密码</Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter password"
@@ -93,7 +93,7 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Form.Group controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>确认密码</Form.Label>
             <Form.Control
               type="password"
               placeholder="Confirm password"
@@ -103,12 +103,12 @@ const ProfileScreen = ({ location, history }) => {
           </Form.Group>
 
           <Button type="submit" variant="primary">
-            Update
+            修改
           </Button>
         </Form>
       </Col>
       <Col md={9}>
-        <h2>My Orders</h2>
+        <h2>我的订单</h2>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
@@ -117,11 +117,11 @@ const ProfileScreen = ({ location, history }) => {
           <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>订单号码</th>
+                <th>日期</th>
+                <th>合计</th>
+                <th>付款</th>
+                <th>配送</th>
                 <th></th>
               </tr>
             </thead>
