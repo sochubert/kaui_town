@@ -25,13 +25,13 @@ const ShippingScreen = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
-      <h1>Shipping</h1>
+      <h1>配送</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
-          <Form.Label>Address</Form.Label>
+          <Form.Label>地址</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter address"
+            placeholder="输入地址"
             value={address}
             required
             onChange={(e) => setAddress(e.target.value)}
@@ -39,10 +39,10 @@ const ShippingScreen = ({ history }) => {
         </Form.Group>
 
         <Form.Group controlId="city">
-          <Form.Label>City</Form.Label>
+          <Form.Label>城市</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter city"
+            placeholder="输入城市"
             value={city}
             required
             onChange={(e) => setCity(e.target.value)}
@@ -72,7 +72,7 @@ const ShippingScreen = ({ history }) => {
         </Form.Group>
 
         <Button type="submit" variant="primary">
-          Continue
+          继续
         </Button>
       </Form>
     </FormContainer>

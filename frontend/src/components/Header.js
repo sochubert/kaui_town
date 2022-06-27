@@ -24,27 +24,27 @@ const Header = () => {
       >
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Kaui Town</Navbar.Brand>
+            <Navbar.Brand>Kuai Town</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ms-auto">
               <Nav.Link as={Link} to={"/cart"}>
-                <i className="fas fa-shopping-cart"></i> Cart
+                <i className="fas fa-shopping-cart"></i> 购物车
               </Nav.Link>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item>简介</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
+                    注销
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <Nav.Link as={Link} to={"/login"}>
-                  <i className="fas fa-user"></i> Sign In
+                  <i className="fas fa-user"></i> 登录
                 </Nav.Link>
               )}
               {userInfo && userInfo.isAdmin && (

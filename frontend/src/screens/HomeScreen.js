@@ -31,10 +31,10 @@ const HomeScreen = ({ match }) => {
         <ProductCarousel />
       ) : (
         <Link to="/" className="btn btn-light">
-          Go Back
+          返回
         </Link>
       )}
-      <h1>Latest Products</h1>
+      <h1>最新产品</h1>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -43,9 +43,7 @@ const HomeScreen = ({ match }) => {
         <>
           <Row>
             {products.length === 0 ? (
-              <Message variant="danger">
-                No Match... Please try another keyword.
-              </Message>
+              <Message variant="danger">查无此物</Message>
             ) : (
               products.map((product) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

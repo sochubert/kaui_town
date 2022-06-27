@@ -65,7 +65,7 @@ const ProductScreen = ({ history, match }) => {
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
-        Go Back
+        返回
       </Link>
       {loading ? (
         <Loader />
@@ -89,10 +89,8 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: {product.price} ₩</ListGroup.Item>
-                <ListGroup.Item>
-                  Description: {product.description}
-                </ListGroup.Item>
+                <ListGroup.Item>价格: {product.price} ₩</ListGroup.Item>
+                <ListGroup.Item>说明: {product.description}</ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={3}>
@@ -100,7 +98,7 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup variant="flush">
                   <ListGroupItem>
                     <Row>
-                      <Col>Price:</Col>
+                      <Col>价格:</Col>
                       <Col>
                         <strong>{product.price} ₩</strong>
                       </Col>
@@ -108,16 +106,14 @@ const ProductScreen = ({ history, match }) => {
                   </ListGroupItem>
                   <ListGroupItem>
                     <Row>
-                      <Col>Status:</Col>
-                      <Col>
-                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
-                      </Col>
+                      <Col>库存:</Col>
+                      <Col>{product.countInStock > 0 ? "有货" : "无货"}</Col>
                     </Row>
                   </ListGroupItem>
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
-                        <Col>Qty</Col>
+                        <Col>数量</Col>
                         <Col>
                           <Form.Control
                             as="select"
@@ -143,7 +139,7 @@ const ProductScreen = ({ history, match }) => {
                       type="button"
                       disabled={product.countInStock === 0}
                     >
-                      Add To Cart
+                      加入购物车
                     </Button>
                   </ListGroupItem>
                 </ListGroup>
@@ -152,8 +148,8 @@ const ProductScreen = ({ history, match }) => {
           </Row>
           <Row>
             <Col md={6}>
-              <h2>Reviews</h2>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
+              <h2>评价</h2>
+              {product.reviews.length === 0 && <Message>没有评价</Message>}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
@@ -164,29 +160,29 @@ const ProductScreen = ({ history, match }) => {
                   </ListGroup.Item>
                 ))}
                 <ListGroup.Item>
-                  <h2>Write a Customer Review</h2>
+                  <h2>顾客评价</h2>
                   {errorProductReview && (
                     <Message variant="danger">{errorProductReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId="rating">
-                        <Form.Label>Rating</Form.Label>
+                        <Form.Label>打分</Form.Label>
                         <Form.Control
                           as="select"
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
                         >
-                          <option value="">Select...</option>
-                          <option value="1">1 - Poor</option>
-                          <option value="2">2 - Fair</option>
-                          <option value="3">3 - Good</option>
-                          <option value="4">4 - Very Good</option>
-                          <option value="5">5 - Excellent</option>
+                          <option value="">选择..</option>
+                          <option value="1">1 - 非常差</option>
+                          <option value="2">2 - 差</option>
+                          <option value="3">3 - 一般</option>
+                          <option value="4">4 - 好</option>
+                          <option value="5">5 - 非常好</option>
                         </Form.Control>
                       </Form.Group>
                       <Form.Group controlId="comment">
-                        <Form.Label>Comment</Form.Label>
+                        <Form.Label>意见</Form.Label>
                         <Form.Control
                           as="textarea"
                           row="3"
@@ -195,12 +191,12 @@ const ProductScreen = ({ history, match }) => {
                         ></Form.Control>
                       </Form.Group>
                       <Button type="submit" variant="primary">
-                        Submit
+                        提交
                       </Button>
                     </Form>
                   ) : (
                     <Message>
-                      Please <Link to="/login">sign in</Link> to write a review
+                      请<Link to="/login">登陆</Link>写下顾客意见
                     </Message>
                   )}
                 </ListGroup.Item>
