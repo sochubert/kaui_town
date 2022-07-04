@@ -9,16 +9,15 @@ const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
+  const [mobile, setMobile] = useState(shippingAddress.mobile);
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
-  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    dispatch(saveShippingAddress({ mobile, address, city }));
     history.push("/payment");
   };
 
@@ -26,6 +25,19 @@ const ShippingScreen = ({ history }) => {
     <FormContainer>
       <CheckoutSteps step1 step2 />
       <h1>配送</h1>
+      请务必输入正确的手机号码。目前只运营配送服务,
+      因此通过短信提供配送相关通知。 不输入地址也没关系。
+      <Form.Group controlId="postalCode">
+        <Form.Label>手机号码</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="
+            输入手机号码"
+          value={mobile}
+          required
+          onChange={(e) => setMobile(e.target.value)}
+        ></Form.Control>
+      </Form.Group>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
           <Form.Label>地址</Form.Label>
@@ -33,7 +45,6 @@ const ShippingScreen = ({ history }) => {
             type="text"
             placeholder="输入地址"
             value={address}
-            required
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -44,30 +55,7 @@ const ShippingScreen = ({ history }) => {
             type="text"
             placeholder="输入城市"
             value={city}
-            required
             onChange={(e) => setCity(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="postalCode">
-          <Form.Label>Postal Code</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter postal code"
-            value={postalCode}
-            required
-            onChange={(e) => setPostalCode(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="country">
-          <Form.Label>Country</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter country"
-            value={country}
-            required
-            onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
 

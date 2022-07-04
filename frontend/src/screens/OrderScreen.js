@@ -31,9 +31,10 @@ const OrderScreen = ({ match, history }) => {
   const { userInfo } = userLogin;
 
   if (!loading) {
-    order.itemsPrice = order.orderItems
-      .reduce((acc, item) => acc + item.price * item.qty, 0)
-      .toFixed(2);
+    order.itemsPrice = order.orderItems.reduce(
+      (acc, item) => acc + item.price * item.qty,
+      0
+    );
   }
 
   useEffect(() => {
@@ -95,9 +96,8 @@ const OrderScreen = ({ match, history }) => {
               </p>
               <p>
                 <strong>地址 : </strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-                {order.shippingAddress.postalCode},{" "}
-                {order.shippingAddress.country}
+                {order.shippingAddress.mobile} {order.shippingAddress.address},{" "}
+                {order.shippingAddress.city}{" "}
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
