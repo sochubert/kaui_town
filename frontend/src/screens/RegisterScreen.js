@@ -29,10 +29,14 @@ const RegisterScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match!");
+    if (password.length < 8) {
+      setMessage("密码太短，英文+数字结合，请设置8位以上！");
     } else {
-      dispatch(register(name, email, password));
+      if (password !== confirmPassword) {
+        setMessage("密码错误");
+      } else {
+        dispatch(register(name, email, password));
+      }
     }
   };
 
@@ -44,7 +48,7 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
-          <Form.Label>姓名</Form.Label>
+          <Form.Label>姓名/昵称</Form.Label>
           <Form.Control
             type="name"
             placeholder="输入姓名"

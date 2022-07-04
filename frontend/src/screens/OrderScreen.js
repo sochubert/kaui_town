@@ -87,7 +87,7 @@ const OrderScreen = ({ match, history }) => {
             <ListGroup.Item>
               <h2>配送</h2>
               <p>
-                <strong>姓名: </strong> {order.user.name}
+                <strong>姓名/昵称: </strong> {order.user.name}
               </p>
               <p>
                 <strong>邮箱: </strong>{" "}
