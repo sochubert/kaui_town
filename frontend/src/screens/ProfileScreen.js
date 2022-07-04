@@ -63,7 +63,7 @@ const ProfileScreen = ({ location, history }) => {
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
-            <Form.Label>昵称</Form.Label>
+            <Form.Label>姓名/昵称</Form.Label>
             <Form.Control
               type="name"
               placeholder="Enter Name"
