@@ -54,9 +54,8 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>配送</h2>
               <p>
                 <strong>地址 : </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
-                {cart.shippingAddress.postalCode},{" "}
-                {cart.shippingAddress.country}
+                {cart.shippingAddress.mobile},{cart.shippingAddress.address},{" "}
+                {cart.shippingAddress.city}{" "}
               </p>
             </ListGroup.Item>
 
