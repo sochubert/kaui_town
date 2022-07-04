@@ -63,7 +63,7 @@ const PlaceOrderScreen = ({ history }) => {
             <ListGroup.Item>
               <h2>付款方式</h2>
               <strong>方法 : </strong>
-              {cart.paymentMethod}
+              转账
             </ListGroup.Item>
 
             <ListGroup.Item>

@@ -4,8 +4,15 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails, deliverOrder } from "../actions/orderActions";
-import { ORDER_DELIVER_RESET } from "../constants/orderConstants";
+import {
+  getOrderDetails,
+  deliverOrder,
+  payOrder,
+} from "../actions/orderActions";
+import {
+  ORDER_DELIVER_RESET,
+  ORDER_PAY_RESET,
+} from "../constants/orderConstants";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -13,6 +20,9 @@ const OrderScreen = ({ match, history }) => {
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderPaid = useSelector((state) => state.orderPaid);
+  const { loading: loadingPaid, success: successPaid } = orderPaid;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
@@ -31,17 +41,34 @@ const OrderScreen = ({ match, history }) => {
       history.push("/login");
     }
 
+    if (!order || successPaid) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch(getOrderDetails(orderId));
+    }
+
     if (!order || successDeliver) {
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, orderId, successDeliver, order, history, userInfo]);
+  }, [
+    dispatch,
+    orderId,
+    successPaid,
+    successDeliver,
+    order,
+    history,
+    userInfo,
+  ]);
 
   useEffect(() => {
     if (!order || order._id !== orderId) {
       dispatch(getOrderDetails(orderId));
     }
   }, [order, orderId, dispatch]);
+
+  const paidHandler = () => {
+    dispatch(payOrder(order));
+  };
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
@@ -85,7 +112,7 @@ const OrderScreen = ({ match, history }) => {
               <h2>付款方式</h2>
               <p>
                 <strong>方式 : </strong>
-                {order.paymentMethod}
+                转账
               </p>
               {order.isPaid ? (
                 <Message variant="success">付款时间 {order.paidAt}</Message>
@@ -161,6 +188,18 @@ const OrderScreen = ({ match, history }) => {
                     onClick={deliverHandler}
                   >
                     Mark As Delivered
+                  </Button>
+                </ListGroup.Item>
+              )}
+              {loadingPaid && <Loader />}
+              {userInfo && userInfo.isAdmin && !order.isPaid && (
+                <ListGroup.Item>
+                  <Button
+                    type="button"
+                    className="btn btn-block"
+                    onClick={paidHandler}
+                  >
+                    Mark As Paid
                   </Button>
                 </ListGroup.Item>
               )}

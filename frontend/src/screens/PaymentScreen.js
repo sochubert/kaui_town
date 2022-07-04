@@ -34,9 +34,9 @@ const PaymentScreen = ({ history }) => {
             <Form.Check
               type="radio"
               label="转账"
-              id="PayPal"
+              id="转账"
               name="paymentMethod"
-              value="PayPal"
+              value="转账"
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
