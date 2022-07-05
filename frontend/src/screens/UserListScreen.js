@@ -34,7 +34,7 @@ const UserListScreen = ({ history }) => {
 
   return (
     <>
-      <h1>Users</h1>
+      <h1>유저관리</h1>
       {loading ? (
         <Loader />
       ) : error ? (
