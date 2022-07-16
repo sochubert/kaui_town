@@ -187,7 +187,7 @@ const OrderScreen = ({ match, history }) => {
                     className="btn btn-block"
                     onClick={deliverHandler}
                   >
-                    Mark As Delivered
+                    발송완료 처리
                   </Button>
                 </ListGroup.Item>
               )}
@@ -199,7 +199,7 @@ const OrderScreen = ({ match, history }) => {
                     className="btn btn-block"
                     onClick={paidHandler}
                   >
-                    Mark As Paid
+                    결제확인 처리
                   </Button>
                 </ListGroup.Item>
               )}
