@@ -1,5 +1,36 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
+import nodemailer from "nodemailer";
+import { Mail } from "node-mailer";
+
+// nodemailer
+const newOrderMail = async () => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.NODEMAILER_USER,
+      pass: process.env.NODEMAILER_PASS,
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: `KUAI TOWN <${process.env.NODEMAILER_USER}>`,
+    to: "headingwarm10@gmail.com",
+    subject: "콰이타운 주문 알림",
+    text: "새로운 주문 정보가 있습니다.",
+    html: `<b>새로운 주문 정보가 있습니다</b>`,
+  });
+  console.log("Message sent: %s", info.messageId);
+
+  res.status(201).json({
+    status: "Success",
+    code: 201,
+    message: "Sent Auth Email",
+  });
+};
 
 // @desc Create new order
 // @route POST /api/orders
@@ -30,6 +61,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     });
 
     const createdOrder = await order.save();
+    newOrderMail();
 
     res.status(201).json(createdOrder);
   }
