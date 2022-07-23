@@ -25,6 +25,7 @@ const ShippingScreen = ({ history }) => {
     <FormContainer>
       <CheckoutSteps step1 step2 />
       <h1>配送</h1>
+<<<<<<< HEAD
       请务必输入正确的手机号码。目前只运营配送服务,
       因此通过短信提供配送相关通知。 不输入地址也没关系。
       <Form.Group controlId="postalCode">
@@ -38,6 +39,8 @@ const ShippingScreen = ({ history }) => {
           onChange={(e) => setMobile(e.target.value)}
         ></Form.Control>
       </Form.Group>
+=======
+>>>>>>> 4c5d266 (Chinese)
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
           <Form.Label>地址</Form.Label>
