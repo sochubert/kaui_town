@@ -107,7 +107,7 @@ const ProductEditScreen = ({ match, history }) => {
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>상품명</Form.Label>
               <Form.Control
                 type="name"
                 placeholder="Enter Name"
@@ -117,7 +117,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="price">
-              <Form.Label>Price</Form.Label>
+              <Form.Label>가격</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter price"
@@ -127,7 +127,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="image">
-              <Form.Label>Image</Form.Label>
+              <Form.Label>상품 이미지</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Image URL"
@@ -145,7 +145,7 @@ const ProductEditScreen = ({ match, history }) => {
             {uploading && <Loader />}
 
             <Form.Group controlId="brand">
-              <Form.Label>Brand</Form.Label>
+              <Form.Label>브랜드</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter brand"
@@ -155,7 +155,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="countInStock">
-              <Form.Label>Count In Stock</Form.Label>
+              <Form.Label>재고량</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter Count In Stock"
@@ -165,7 +165,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="category">
-              <Form.Label>Category</Form.Label>
+              <Form.Label>카테고리</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter category"
@@ -175,7 +175,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="description">
-              <Form.Label>Description</Form.Label>
+              <Form.Label>상품 설명</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter description"
