@@ -48,11 +48,7 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
-<<<<<<< HEAD
           <Form.Label>姓名/昵称</Form.Label>
-=======
-          <Form.Label>姓名</Form.Label>
->>>>>>> 4c5d266 (Chinese)
           <Form.Control
             type="name"
             placeholder="输入姓名"

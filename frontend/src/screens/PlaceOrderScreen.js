@@ -54,25 +54,15 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>配送</h2>
               <p>
                 <strong>地址 : </strong>
-<<<<<<< HEAD
                 {cart.shippingAddress.mobile},{cart.shippingAddress.address},{" "}
                 {cart.shippingAddress.city}{" "}
-=======
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
-                {cart.shippingAddress.postalCode},{" "}
-                {cart.shippingAddress.country}
->>>>>>> 4c5d266 (Chinese)
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>付款方式</h2>
               <strong>方法 : </strong>
-<<<<<<< HEAD
               转账
-=======
->>>>>>> 4c5d266 (Chinese)
-              {cart.paymentMethod}
             </ListGroup.Item>
 
             <ListGroup.Item>
