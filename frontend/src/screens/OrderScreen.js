@@ -88,11 +88,7 @@ const OrderScreen = ({ match, history }) => {
             <ListGroup.Item>
               <h2>配送</h2>
               <p>
-<<<<<<< HEAD
                 <strong>姓名/昵称: </strong> {order.user.name}
-=======
-                <strong>姓名: </strong> {order.user.name}
->>>>>>> 4c5d266 (Chinese)
               </p>
               <p>
                 <strong>邮箱: </strong>{" "}
@@ -100,14 +96,8 @@ const OrderScreen = ({ match, history }) => {
               </p>
               <p>
                 <strong>地址 : </strong>
-<<<<<<< HEAD
                 {order.shippingAddress.mobile} {order.shippingAddress.address},{" "}
                 {order.shippingAddress.city}{" "}
-=======
-                {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-                {order.shippingAddress.postalCode},{" "}
-                {order.shippingAddress.country}
->>>>>>> 4c5d266 (Chinese)
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
