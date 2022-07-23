@@ -24,13 +24,8 @@ const SearchBox = ({ history }) => {
         onChange={(e) => setKeyword(e.target.value)}
         placeholder="搜索产品"
       ></Form.Control>
-<<<<<<< HEAD
       <Button type="submit" className="p-3">
         <i class="fa-solid fa-magnifying-glass"></i>
-=======
-      <Button type="submit" variant="primary" className="p-2">
-        查询
->>>>>>> 4c5d266 (Chinese)
       </Button>
     </Form>
   );

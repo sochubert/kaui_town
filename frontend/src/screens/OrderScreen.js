@@ -122,11 +122,7 @@ const OrderScreen = ({ match, history }) => {
               <h2>付款方式</h2>
               <p>
                 <strong>方式 : </strong>
-<<<<<<< HEAD
                 转账
-=======
-                {order.paymentMethod}
->>>>>>> 4c5d266 (Chinese)
               </p>
               {order.isPaid ? (
                 <Message variant="success">付款时间 {order.paidAt}</Message>
