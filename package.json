@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/sochubert/kaui_town.git"
   },
-  "engine": {
+  "engins": {
     "node": "16.14.0",
     "npm": "8.3.1"
   },
