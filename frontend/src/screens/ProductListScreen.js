@@ -61,7 +61,7 @@ const ProductListScreen = ({ history, match }) => {
   ]);
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm("정말로 지우겠습니까?")) {
       dispatch(deleteProduct(id));
     }
   };
