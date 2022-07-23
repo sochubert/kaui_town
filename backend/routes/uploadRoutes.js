@@ -1,15 +1,13 @@
 import express from "express";
 import multer from "multer";
 const router = express.Router();
-// import path from 'path';
-import { protect, admin } from "../middleware/authMiddleware.js";
 
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 
 //multer s3
 const s3 = new aws.S3();
-//make sure you name the keys correctly
+
 aws.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -39,21 +37,10 @@ const upload = multer({
   }),
 });
 
-//use req.file.location
 const returnImageUrl = (req, res) => {
   return res.send(`${req.file.location}`);
 };
 
-//test env vars
-// const getKeys = (req, res) => {
-//   res.json({
-//     secretAccessKey: process.env.S3_ACCESS_KEY_ID,
-//     accessKeyId: process.env.S3_SECRET_ACCESS_KEY
-//   });
-// };
-
-//single file upload
 router.route("/").post(upload.single("image"), returnImageUrl);
-// .get(getKeys);
 
 export default router;
