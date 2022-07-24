@@ -34,7 +34,7 @@ const App = () => {
             component={HomeScreen}
             exact
           />
-          <Route path="/page/:pageNumber" component={HomeScreen} />
+          <Route path="/page/:" component={HomeScreen} />
           <Route path="/product/:id" component={ProductScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
