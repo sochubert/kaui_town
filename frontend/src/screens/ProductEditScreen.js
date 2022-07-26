@@ -127,7 +127,7 @@ const ProductEditScreen = ({ match, history }) => {
             </Form.Group>
 
             <Form.Group controlId="image">
-              <Form.Label>상품 이미지</Form.Label>
+              <Form.Label>상품 메인 이미지</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Image URL"
