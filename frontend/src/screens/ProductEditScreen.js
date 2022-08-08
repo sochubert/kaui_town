@@ -15,11 +15,13 @@ const ProductEditScreen = ({ match, history }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
+  const [detailImages, setDetailImages] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [detailUploading, setDetailUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -44,6 +46,7 @@ const ProductEditScreen = ({ match, history }) => {
         setName(product.name);
         setPrice(product.price);
         setImage(product.image);
+        setDetailImages(product.detailImages);
         setBrand(product.brand);
         setCategory(product.category);
         setCountInStock(product.countInStock);
@@ -75,6 +78,33 @@ const ProductEditScreen = ({ match, history }) => {
     }
   };
 
+  const uploadDetailFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("detailImages", file);
+    setDetailUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/upload/detailImages",
+        formData,
+        config
+      );
+
+      setDetailImages(data);
+      setDetailUploading(false);
+    } catch (error) {
+      console.error(error);
+      setDetailUploading(false);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -83,6 +113,7 @@ const ProductEditScreen = ({ match, history }) => {
         name,
         price,
         image,
+        detailImages,
         brand,
         category,
         description,
@@ -143,6 +174,24 @@ const ProductEditScreen = ({ match, history }) => {
               onChange={uploadFileHandler}
             ></Form.Control>
             {uploading && <Loader />}
+
+            <Form.Group controlId="detailImages">
+              <Form.Label>상품 상세 이미지</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Detail Image URL"
+                value={detailImages}
+                onChange={(e) => setDetailImages(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Control
+              type="file"
+              id="image-file"
+              label="Choose File"
+              custom="true"
+              onChange={uploadDetailFileHandler}
+            ></Form.Control>
+            {detailUploading && <Loader />}
 
             <Form.Group controlId="brand">
               <Form.Label>브랜드</Form.Label>

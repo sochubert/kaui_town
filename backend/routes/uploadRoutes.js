@@ -42,5 +42,8 @@ const returnImageUrl = (req, res) => {
 };
 
 router.route("/").post(upload.single("image"), returnImageUrl);
+router
+  .route("/detailImages")
+  .post(upload.single("detailImages"), returnImageUrl);
 
 export default router;

@@ -62,7 +62,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price: 0,
     user: req.user._id,
     image: "이미지",
-    detailImages: [""],
+    detailImages: "디테일 이미지",
     brand: "브랜드",
     category: "카테고리",
     countInStock: 0,
