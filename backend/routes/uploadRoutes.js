@@ -45,5 +45,11 @@ router.route("/").post(upload.single("image"), returnImageUrl);
 router
   .route("/detailImages")
   .post(upload.single("detailImages"), returnImageUrl);
+router
+  .route("/detailImages2")
+  .post(upload.single("detailImages2"), returnImageUrl);
+router
+  .route("/detailImages3")
+  .post(upload.single("detailImages3"), returnImageUrl);
 
 export default router;

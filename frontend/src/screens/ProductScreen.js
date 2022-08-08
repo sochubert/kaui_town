@@ -145,6 +145,36 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup>
               </Card>
             </Col>
+            {product.detailImages ? (
+              <Image
+                src={product.detailImages}
+                alt={product.name}
+                className="mx-auto mt-5 mb-5"
+                fluid
+              />
+            ) : (
+              <></>
+            )}
+            {product.detailImages2 ? (
+              <Image
+                src={product.detailImages2}
+                alt={product.name}
+                className="mx-auto mt-5 mb-5"
+                fluid
+              />
+            ) : (
+              <></>
+            )}
+            {product.detailImages3 ? (
+              <Image
+                src={product.detailImages3}
+                alt={product.name}
+                className="mx-auto mt-5 mb-5"
+                fluid
+              />
+            ) : (
+              <></>
+            )}
           </Row>
           <Row>
             <Col md={6}>

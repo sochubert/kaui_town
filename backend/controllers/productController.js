@@ -62,7 +62,9 @@ const createProduct = asyncHandler(async (req, res) => {
     price: 0,
     user: req.user._id,
     image: "이미지",
-    detailImages: "디테일 이미지",
+    detailImages: "상세 이미지1",
+    detailImages2: "상세 이미지2",
+    detailImages3: "상세 이미지3",
     brand: "브랜드",
     category: "카테고리",
     countInStock: 0,
@@ -84,6 +86,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     description,
     image,
     detailImages,
+    detailImages2,
+    detailImages3,
     brand,
     category,
     countInStock,
@@ -97,6 +101,8 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.description = description;
     product.image = image;
     product.detailImages = detailImages;
+    product.detailImages2 = detailImages2;
+    product.detailImages3 = detailImages3;
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
