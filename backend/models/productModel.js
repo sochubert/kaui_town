@@ -76,6 +76,7 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    hashTags: [String],
   },
   {
     timestamps: true,
