@@ -20,6 +20,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [detailImages3, setDetailImages3] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
+  const [hashTags, setHashTags] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);

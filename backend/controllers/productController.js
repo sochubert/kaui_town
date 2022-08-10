@@ -63,13 +63,14 @@ const createProduct = asyncHandler(async (req, res) => {
     user: req.user._id,
     image: "이미지",
     detailImages: "상세 이미지1",
-    detailImages2: "상세 이미지2",
-    detailImages3: "상세 이미지3",
+    detailImages,
+    detailImages3,
     brand: "브랜드",
     category: "카테고리",
     countInStock: 0,
     numReviews: 0,
     description: "설명",
+    hashTags,
   });
 
   const createdProduct = await product.save();
@@ -91,6 +92,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     brand,
     category,
     countInStock,
+    hashTags,
   } = req.body;
 
   const product = await Product.findById(req.params.id);
@@ -106,6 +108,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
+    product.hashTags = hashTags;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
