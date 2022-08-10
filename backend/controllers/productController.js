@@ -63,14 +63,14 @@ const createProduct = asyncHandler(async (req, res) => {
     user: req.user._id,
     image: "이미지",
     detailImages: "상세 이미지1",
-    detailImages,
-    detailImages3,
+    detailImages: "",
+    detailImages3: "",
     brand: "브랜드",
     category: "카테고리",
     countInStock: 0,
     numReviews: 0,
     description: "설명",
-    hashTags,
+    hashTags: [],
   });
 
   const createdProduct = await product.save();
