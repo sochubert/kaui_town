@@ -55,6 +55,7 @@ const ProductEditScreen = ({ match, history }) => {
         setDetailImages2(product.detailImages2);
         setDetailImages3(product.detailImages3);
         setBrand(product.brand);
+        setHashTags(product.hashTags);
         setCategory(product.category);
         setCountInStock(product.countInStock);
         setDescription(product.description);
@@ -178,6 +179,7 @@ const ProductEditScreen = ({ match, history }) => {
         detailImages2,
         detailImages3,
         brand,
+        hashTags,
         category,
         description,
         countInStock,
@@ -291,6 +293,16 @@ const ProductEditScreen = ({ match, history }) => {
               onChange={uploadDetailFileHandler3}
             ></Form.Control>
             {detailUploading3 && <Loader />}
+
+            <Form.Group controlId="hashTags">
+              <Form.Label>해시태그(관련 상품 추천용)</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter hashTags"
+                value={hashTags}
+                onChange={(e) => setHashTags(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
             <Form.Group controlId="brand">
               <Form.Label>브랜드</Form.Label>
