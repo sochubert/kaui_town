@@ -13,6 +13,7 @@ const UserEditScreen = ({ match, history }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isSeller, setIsSeller] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const UserEditScreen = ({ match, history }) => {
       } else {
         setName(user.name);
         setEmail(user.email);
+        setIsSeller(user.isSeller);
         setIsAdmin(user.isAdmin);
       }
     }
@@ -44,7 +46,7 @@ const UserEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
+    dispatch(updateUser({ _id: userId, name, email, isSeller, isAdmin }));
   };
 
   return (
@@ -53,7 +55,7 @@ const UserEditScreen = ({ match, history }) => {
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit User</h1>
+        <h1>유저 관리</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
@@ -80,6 +82,16 @@ const UserEditScreen = ({ match, history }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId="isseller">
+              <Form.Check
+                type="checkbox"
+                label="Is Seller"
+                value={isSeller}
+                checked={isSeller}
+                onChange={(e) => setIsSeller(e.target.checked)}
+              ></Form.Check>
             </Form.Group>
 
             <Form.Group controlId="isadmin">

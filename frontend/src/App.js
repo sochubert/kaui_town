@@ -47,12 +47,27 @@ const App = () => {
             exact
           />
           <Route
+            path="/seller/productlist"
+            component={ProductListScreen}
+            exact
+          />
+          <Route
             path="/admin/productlist/:pageNumber"
             component={ProductListScreen}
             exact
           />
+          <Route
+            path="/seller/productlist/:pageNumber"
+            component={ProductListScreen}
+            exact
+          />
           <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
+          <Route
+            path="/seller/product/:id/edit"
+            component={ProductEditScreen}
+          />
           <Route path="/admin/orderlist" component={OrderListScreen} />
+          <Route path="/seller/orderlist" component={OrderListScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/payment" component={PaymentScreen} />

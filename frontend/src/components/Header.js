@@ -47,6 +47,16 @@ const Header = () => {
                   <i className="fas fa-user"></i> 登录
                 </Nav.Link>
               )}
+              {userInfo && userInfo.isSeller && (
+                <NavDropdown title="판매자 모드" id="sellermenu">
+                  <LinkContainer to="/seller/productlist">
+                    <NavDropdown.Item>상품관리</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/seller/orderlist">
+                    <NavDropdown.Item>주문관리</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title="관리자 모드" id="adminmenu">
                   <LinkContainer to="/admin/userlist">
