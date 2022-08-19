@@ -59,6 +59,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name: "이름",
+    seller: req.user._id,
     price: 0,
     user: req.user._id,
     image: "이미지",
