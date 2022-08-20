@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 import { Mail } from "node-mailer";
 
 // nodemailer
-const newOrderMail = async (req, res) => {
+const newOrderMail = asyncHandler(async (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -30,7 +30,7 @@ const newOrderMail = async (req, res) => {
     code: 201,
     message: "Sent Auth Email",
   });
-};
+});
 
 // @desc Create new order
 // @route POST /api/orders

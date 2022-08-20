@@ -14,7 +14,6 @@ import {
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
 import axios from "axios";
-import { Helmet } from "react-helmet";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -51,16 +50,16 @@ const OrderScreen = ({ match, history }) => {
       script.async = true;
       setTimeout(() => {
         document.body.appendChild(script);
-      }, 1000);
+      }, 500);
     };
 
     addNicepayScript();
 
-    if (!order || successPaid) {
+    if (!order || successPaid || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     }
-
     if (!order || successDeliver) {
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
@@ -75,32 +74,37 @@ const OrderScreen = ({ match, history }) => {
     userInfo,
   ]);
 
+  const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(orderId, paymentResult));
+  };
+
   useEffect(() => {
     if (!order || order._id !== orderId) {
       dispatch(getOrderDetails(orderId));
     }
   }, [order, orderId, dispatch]);
 
+  // 관리자 강제 결제 완료 처리
   const paidHandler = () => {
     dispatch(payOrder(order));
   };
 
+  // 관리자 강제 배송 완료 처리
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
   };
 
   const payOrderHandler = async () => {
-    console.log(window);
     const { AUTHNICE } = window;
     AUTHNICE.requestPay({
       clientId: "R2_5139e0b9b9534858b36512076c2100fe",
       method: "card",
-      orderId: "123123123",
-      amount: 1004,
-      goodsName: "나이스페이-상품",
-      returnUrl: "http://localhost:3000/serverAuth",
+      orderId: order._id,
+      amount: order.totalPrice,
+      goodsName: "Kaui Town",
+      returnUrl: `http://localhost:3000/order/${order._id}`,
       fnError: function (result) {
-        alert("개발자확인용 : " + result.errorMsg + "");
+        alert(result.errorMsg);
       },
     });
   };
