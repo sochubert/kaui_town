@@ -46,7 +46,6 @@ const PaymentScreen = ({ history }) => {
             ></Form.Check>
           </Col>
         </Form.Group>
-        {/* <Button onClick="serverAuth()">나이스 테스트!</Button> */}
         <Button type="submit" variant="primary">
           Continue
         </Button>

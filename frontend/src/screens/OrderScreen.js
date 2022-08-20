@@ -102,7 +102,7 @@ const OrderScreen = ({ match, history }) => {
       orderId: order._id,
       amount: order.totalPrice,
       goodsName: "Kaui Town",
-      returnUrl: `http://localhost:3000/order/${order._id}`,
+      returnUrl: `http://localhost:5001/api/orders/nicepay/serverAuth`,
       fnError: function (result) {
         alert(result.errorMsg);
       },
