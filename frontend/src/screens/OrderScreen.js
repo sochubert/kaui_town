@@ -13,6 +13,8 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
+import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -41,6 +43,18 @@ const OrderScreen = ({ match, history }) => {
     if (!userInfo) {
       history.push("/login");
     }
+
+    const addNicepayScript = async () => {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://pay.nicepay.co.kr/v1/js/";
+      script.async = true;
+      setTimeout(() => {
+        document.body.appendChild(script);
+      }, 1000);
+    };
+
+    addNicepayScript();
 
     if (!order || successPaid) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -73,6 +87,22 @@ const OrderScreen = ({ match, history }) => {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
+  };
+
+  const payOrderHandler = async () => {
+    console.log(window);
+    const { AUTHNICE } = window;
+    AUTHNICE.requestPay({
+      clientId: "R2_5139e0b9b9534858b36512076c2100fe",
+      method: "card",
+      orderId: "123123123",
+      amount: 1004,
+      goodsName: "나이스페이-상품",
+      returnUrl: "http://localhost:3000/serverAuth",
+      fnError: function (result) {
+        alert("개발자확인용 : " + result.errorMsg + "");
+      },
+    });
   };
 
   return loading ? (
@@ -193,6 +223,17 @@ const OrderScreen = ({ match, history }) => {
                   <Col>{order.totalPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  <Button
+                    type="button"
+                    className="btn btn-block"
+                    onClick={payOrderHandler}
+                  >
+                    결제하기
+                  </Button>
+                </ListGroup.Item>
+              )}
               {loadingDeliver && <Loader />}
               {userInfo && userInfo.isAdmin && !order.isDelivered && (
                 <ListGroup.Item>

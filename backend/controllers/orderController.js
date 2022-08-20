@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 import { Mail } from "node-mailer";
 
 // nodemailer
-const newOrderMail = async () => {
+const newOrderMail = async (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
