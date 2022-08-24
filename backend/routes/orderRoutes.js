@@ -18,7 +18,7 @@ router.route("/").post(protect, addOrderItems).get(protect, admin, getOrders);
 router.route("/myorders").get(protect, getMyOrders);
 router.route("/:id").get(protect, getOrderById);
 router.route("/:id/pay").put(protect, admin, updateOrderToPaid);
-router.route("/nicepay").put(protect, updateOrderToPaid);
+
 router.get("/nicepay/cancel", function (req, res) {
   res.render("cancel");
 });
@@ -65,7 +65,7 @@ router.post("/nicepay/cancel", function (req, res) {
         json: {
           amount: req.body.amount,
           reason: "test",
-          orderId: uuid(),
+          orderId: orderId,
         },
         responseType: "json",
       }
