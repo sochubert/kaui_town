@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,17 +15,19 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
-import axios from "axios";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
+
+  const [sdkReady, setSdkReady] = useState(false);
+
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  const orderPaid = useSelector((state) => state.orderPaid);
-  const { loading: loadingPaid, success: successPaid } = orderPaid;
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
@@ -39,40 +43,49 @@ const OrderScreen = ({ match, history }) => {
   }
 
   useEffect(() => {
+    const addPaypalScript = async () => {
+      const { data: clientId } = await axios.get("/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
     if (!userInfo) {
       history.push("/login");
     }
 
-    const addNicepayScript = async () => {
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = "https://pay.nicepay.co.kr/v1/js/";
-      script.async = true;
-      setTimeout(() => {
-        document.body.appendChild(script);
-      }, 500);
-    };
+    // const addNicepayScript = async () => {
+    //   const script = document.createElement("script");
+    //   script.type = "text/javascript";
+    //   script.src = "https://pay.nicepay.co.kr/v1/js/";
+    //   script.async = true;
+    //   setTimeout(() => {
+    //     document.body.appendChild(script);
+    //   }, 500);
+    // };
 
-    addNicepayScript();
+    // addNicepayScript();
 
-    if (!order || successPaid || successDeliver) {
+    if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
-      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPaypalScript();
+      } else {
+        setSdkReady(true);
+      }
     }
     if (!order || successDeliver) {
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     }
-  }, [
-    dispatch,
-    orderId,
-    successPaid,
-    successDeliver,
-    order,
-    history,
-    userInfo,
-  ]);
+  }, [dispatch, orderId, successPay, successDeliver, order, history, userInfo]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -94,20 +107,20 @@ const OrderScreen = ({ match, history }) => {
     dispatch(deliverOrder(order));
   };
 
-  const payOrderHandler = async () => {
-    const { AUTHNICE } = window;
-    AUTHNICE.requestPay({
-      clientId: "R2_5139e0b9b9534858b36512076c2100fe",
-      method: "card",
-      orderId: order._id,
-      amount: order.totalPrice,
-      goodsName: "Kaui Town",
-      returnUrl: `http://localhost:5001/api/orders/nicepay/serverAuth`,
-      fnError: function (result) {
-        alert(result.errorMsg);
-      },
-    });
-  };
+  // const payOrderHandler = async () => {
+  //   const { AUTHNICE } = window;
+  //   AUTHNICE.requestPay({
+  //     clientId: "R2_5139e0b9b9534858b36512076c2100fe",
+  //     method: "card",
+  //     orderId: order._id,
+  //     amount: order.totalPrice,
+  //     goodsName: "Kaui Town",
+  //     returnUrl: `http://localhost:5001/api/orders/nicepay/serverAuth`,
+  //     fnError: function (result) {
+  //       alert(result.errorMsg);
+  //     },
+  //   });
+  // };
 
   return loading ? (
     <Loader />
@@ -145,7 +158,7 @@ const OrderScreen = ({ match, history }) => {
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  配送时间 {order.deliveredAt}
+                  配送时间 {order.deliveredAt.substring(0, 10)}
                 </Message>
               ) : (
                 <Message variant="danger">准备发货</Message>
@@ -163,7 +176,9 @@ const OrderScreen = ({ match, history }) => {
 >>>>>>> 329d3b6 (Chinese)
               </p>
               {order.isPaid ? (
-                <Message variant="success">付款时间 {order.paidAt}</Message>
+                <Message variant="success">
+                  付款时间 {order.paidAt.substring(0, 10)}
+                </Message>
               ) : (
                 <Message variant="danger">结账确认中</Message>
               )}
@@ -229,13 +244,15 @@ const OrderScreen = ({ match, history }) => {
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
-                  <Button
-                    type="button"
-                    className="btn btn-block"
-                    onClick={payOrderHandler}
-                  >
-                    결제하기
-                  </Button>
+                  {loadingPay && <Loader />}
+                  {!sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Loader />}
@@ -250,7 +267,7 @@ const OrderScreen = ({ match, history }) => {
                   </Button>
                 </ListGroup.Item>
               )}
-              {loadingPaid && <Loader />}
+              {loadingPay && <Loader />}
               {userInfo && userInfo.isAdmin && !order.isPaid && (
                 <ListGroup.Item>
                   <Button

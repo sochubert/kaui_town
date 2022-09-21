@@ -25,11 +25,12 @@ const newOrderMail = asyncHandler(async (req, res) => {
   });
   console.log("Message sent: %s", info.messageId);
 
-  res.status(201).json({
-    status: "Success",
-    code: 201,
-    message: "Sent Auth Email",
-  });
+  res &&
+    res.status(201).json({
+      status: "Success",
+      code: 201,
+      message: "Sent Auth Email",
+    });
 });
 
 // @desc Create new order

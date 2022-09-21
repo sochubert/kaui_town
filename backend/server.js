@@ -28,6 +28,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 app.get("/api/config/nicepay", (req, res) =>
   res.send(process.env.NICEPAY_CLIENT_ID)
 );
