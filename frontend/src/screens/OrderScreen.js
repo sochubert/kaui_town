@@ -107,20 +107,20 @@ const OrderScreen = ({ match, history }) => {
     dispatch(deliverOrder(order));
   };
 
-  // const payOrderHandler = async () => {
-  //   const { AUTHNICE } = window;
-  //   AUTHNICE.requestPay({
-  //     clientId: "R2_5139e0b9b9534858b36512076c2100fe",
-  //     method: "card",
-  //     orderId: order._id,
-  //     amount: order.totalPrice,
-  //     goodsName: "Kaui Town",
-  //     returnUrl: `http://localhost:5001/api/orders/nicepay/serverAuth`,
-  //     fnError: function (result) {
-  //       alert(result.errorMsg);
-  //     },
-  //   });
-  // };
+  const payOrderHandler = async () => {
+    const { AUTHNICE } = window;
+    AUTHNICE.requestPay({
+      clientId: "R2_5139e0b9b9534858b36512076c2100fe",
+      method: "card",
+      orderId: order._id,
+      amount: order.totalPrice,
+      goodsName: "Kaui Town",
+      returnUrl: `http://localhost:3000/api/orders/nicepay/serverAuth`,
+      fnError: function (result) {
+        alert(result.errorMsg);
+      },
+    });
+  };
 
   return loading ? (
     <Loader />
