@@ -19,6 +19,13 @@ router.route("/myorders").get(protect, getMyOrders);
 router.route("/:id").get(protect, getOrderById);
 router.route("/:id/pay").put(protect, admin, updateOrderToPaid);
 
+router.get("/nicepay", function (req, res) {
+  res.render("orderRoutes", {
+    orderId: "632ac0a67897823efba77512",
+    clientId: clientId,
+  });
+});
+
 router.get("/nicepay/cancel", function (req, res) {
   res.render("cancel");
 });
@@ -37,6 +44,7 @@ router.post("/nicepay/serverAuth", function (req, res) {
     })
     .then(function (response) {
       console.log(response.body);
+      // 결제 비즈니스 로직 구현
 
       res.render("response", {
         resultMsg: response.body.resultMsg,

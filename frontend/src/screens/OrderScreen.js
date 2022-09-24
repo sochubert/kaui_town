@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { PayPalButton } from "react-paypal-button-v2";
 import { Link } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,11 +42,10 @@ const OrderScreen = ({ match, history }) => {
   }
 
   useEffect(() => {
-    const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
+    const addNicepayScript = async () => {
       const script = document.createElement("script");
       script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.src = "https://pay.nicepay.co.kr/v1/js/";
       script.async = true;
       script.onload = () => {
         setSdkReady(true);
@@ -59,24 +57,12 @@ const OrderScreen = ({ match, history }) => {
       history.push("/login");
     }
 
-    // const addNicepayScript = async () => {
-    //   const script = document.createElement("script");
-    //   script.type = "text/javascript";
-    //   script.src = "https://pay.nicepay.co.kr/v1/js/";
-    //   script.async = true;
-    //   setTimeout(() => {
-    //     document.body.appendChild(script);
-    //   }, 500);
-    // };
-
-    // addNicepayScript();
-
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPaypalScript();
+      if (!window.nicepay) {
+        addNicepayScript();
       } else {
         setSdkReady(true);
       }
@@ -110,7 +96,7 @@ const OrderScreen = ({ match, history }) => {
   const payOrderHandler = async () => {
     const { AUTHNICE } = window;
     AUTHNICE.requestPay({
-      clientId: "R2_5139e0b9b9534858b36512076c2100fe",
+      clientId: "S2_e98a8b476d4d4defb2daea9082d3e928",
       method: "card",
       orderId: order._id,
       amount: order.totalPrice,
@@ -248,10 +234,7 @@ const OrderScreen = ({ match, history }) => {
                   {!sdkReady ? (
                     <Loader />
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
+                    <Button onClick={payOrderHandler}>결제하기</Button>
                   )}
                 </ListGroup.Item>
               )}
@@ -275,7 +258,7 @@ const OrderScreen = ({ match, history }) => {
                     className="btn btn-block"
                     onClick={paidHandler}
                   >
-                    결제확인 처리
+                    강제 결제확인 처리
                   </Button>
                 </ListGroup.Item>
               )}
