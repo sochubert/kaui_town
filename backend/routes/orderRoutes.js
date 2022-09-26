@@ -21,7 +21,7 @@ router.route("/:id/pay").put(protect, admin, updateOrderToPaid);
 
 router.get("/nicepay", function (req, res) {
   res.render("orderRoutes", {
-    orderId: "632ac0a67897823efba77512",
+    orderId: orderId,
     clientId: clientId,
   });
 });
@@ -29,6 +29,7 @@ router.get("/nicepay", function (req, res) {
 router.get("/nicepay/cancel", function (req, res) {
   res.render("cancel");
 });
+
 router.post("/nicepay/serverAuth", function (req, res) {
   got
     .post("https://sandbox-api.nicepay.co.kr/v1/payments/" + req.body.tid, {
