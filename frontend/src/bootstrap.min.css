@@ -79,6 +79,7 @@
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
+    background-color: #dfe4ea;
   }
 }
 body {
@@ -6172,7 +6173,7 @@ fieldset:disabled .btn {
   justify-content: center;
   width: 15%;
   padding: 0;
-  color: #fff;
+  color: rgb(150, 0, 24);
   text-align: center;
   background: 0 0;
   border: 0;
@@ -6189,7 +6190,7 @@ fieldset:disabled .btn {
 .carousel-control-next:hover,
 .carousel-control-prev:focus,
 .carousel-control-prev:hover {
-  color: #fff;
+  color: rgb(150, 0, 24) !important;
   text-decoration: none;
   outline: 0;
   opacity: 0.9;
@@ -6242,7 +6243,7 @@ fieldset:disabled .btn {
   margin-left: 3px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: rgb(150, 0, 24);
   background-clip: padding-box;
   border: 0;
   border-top: 10px solid transparent;
@@ -6265,7 +6266,7 @@ fieldset:disabled .btn {
   left: 15%;
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-  color: #fff;
+  color: rgb(150, 0, 24);
   text-align: center;
 }
 .carousel-dark .carousel-control-next-icon,
@@ -7694,8 +7695,7 @@ fieldset:disabled .btn {
   background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
 }
 .bg-light {
-  --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  background-color: white !important;
 }
 .bg-dark {
   --bs-bg-opacity: 1;
