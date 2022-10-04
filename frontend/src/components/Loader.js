@@ -1,21 +1,20 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
+import { Facebook } from "react-spinners-css";
 
 const Loader = () => {
   return (
-    <Spinner
-      animation="border"
-      variant="danger"
-      role="status"
+    <Facebook
+      color="#960018"
       style={{
-        width: "100px",
-        height: "100px",
+        width: "120px",
+        height: "120px",
         margin: "auto",
+        "margin-top": "30px",
         display: "block",
       }}
     >
-      <span className="sr-only">loading...</span>
-    </Spinner>
+      <span className="sr-only"></span>
+    </Facebook>
   );
 };
 
