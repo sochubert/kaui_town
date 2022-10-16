@@ -3,9 +3,12 @@ import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -14,6 +17,9 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logout());
   };
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
+
   return (
     <header>
       <Navbar
@@ -23,6 +29,20 @@ const Header = () => {
         collapseOnSelect
       >
         <Container>
+          <div className="on__mobile__lang__btn">
+            <button
+              onClick={() => i18n.changeLanguage("ko")}
+              className="lang_button"
+            >
+              🇰🇷
+            </button>
+            <button
+              onClick={() => i18n.changeLanguage("ko")}
+              className="lang_button"
+            >
+              🇨🇳
+            </button>
+          </div>
           <LinkContainer to="/">
             <Navbar.Brand>Kuai Town</Navbar.Brand>
           </LinkContainer>
@@ -32,6 +52,7 @@ const Header = () => {
             <Nav className="ms-auto">
               <Nav.Link as={Link} to={"/cart"}>
                 <i className="fas fa-shopping-cart"></i> 购物车
+                {t("hello")}
               </Nav.Link>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">

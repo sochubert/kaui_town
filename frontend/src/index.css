@@ -54,8 +54,22 @@ h3 {
   color: rgb(89, 89, 89);
   font-size: 10px;
 }
+
+.on__mobile__lang__btn {
+  display: none;
+}
+
+.lang_button {
+  border: 0;
+  background: none;
+  font-size: 1.5rem;
+}
+
 @media (max-width: 900px) {
   .carousel-caption h2 {
     font-size: 2.5vw;
+  }
+  .on__mobile__lang__btn {
+    display: block;
   }
 }
