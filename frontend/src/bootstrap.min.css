@@ -4598,7 +4598,7 @@ fieldset:disabled .btn {
   min-width: 0;
   word-wrap: break-word;
   background-clip: border-box;
-  border: 0 solid rgba(0, 0, 0, 0.125);
+  /* border: 0 solid rgba(0, 0, 0, 0.125); */
   border-radius: 0.25rem;
 }
 .card > hr {

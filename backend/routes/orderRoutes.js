@@ -18,18 +18,10 @@ router.route("/").post(protect, addOrderItems).get(protect, admin, getOrders);
 router.route("/myorders").get(protect, getMyOrders);
 router.route("/:id").get(protect, getOrderById);
 router.route("/:id/pay").put(protect, admin, updateOrderToPaid);
-
-router.get("/nicepay", function (req, res) {
-  res.render("orderRoutes", {
-    orderId: orderId,
-    clientId: clientId,
-  });
-});
-
+router.route("/nicepay").put(protect, updateOrderToPaid);
 router.get("/nicepay/cancel", function (req, res) {
   res.render("cancel");
 });
-
 router.post("/nicepay/serverAuth", function (req, res) {
   got
     .post("https://sandbox-api.nicepay.co.kr/v1/payments/" + req.body.tid, {
