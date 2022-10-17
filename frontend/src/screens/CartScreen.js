@@ -12,6 +12,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -22,6 +25,8 @@ const CartScreen = ({ match, location, history }) => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   useEffect(() => {
     if (productId) {
@@ -40,10 +45,10 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <Row>
       <Col md={8}>
-        <h1>购物车</h1>
+        <h1>{t("shopping-cart")}</h1>
         {cartItems.length === 0 ? (
           <Message>
-            你的购物车是空的 <Link to="/">返回</Link>
+            {t("shopping-cart-empty")} <Link to="/">{t("back")}</Link>
           </Message>
         ) : (
           <ListGroup variant="flush">
@@ -94,7 +99,8 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>
-                合计 ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) 项目
+                {t("total")} (
+                {cartItems.reduce((acc, item) => acc + item.qty, 0)}) {t("qty")}
               </h3>
               {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)}₩
             </ListGroup.Item>
@@ -105,7 +111,7 @@ const CartScreen = ({ match, location, history }) => {
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
-                结账
+                {t("checkout")}
               </Button>
             </ListGroup.Item>
           </ListGroup>

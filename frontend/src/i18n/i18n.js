@@ -26,7 +26,7 @@ i18n
       ko: {
         lang: ko,
       },
-      en: {
+      cn: {
         lang: cn,
       },
     },

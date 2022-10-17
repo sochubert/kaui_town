@@ -9,6 +9,9 @@ import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
 import Meta from "../components/Meta";
 import ProductCarousel from "../components/ProductCarousel";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -19,6 +22,8 @@ const HomeScreen = ({ match }) => {
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
@@ -31,10 +36,10 @@ const HomeScreen = ({ match }) => {
         <ProductCarousel />
       ) : (
         <Link to="/" className="btn btn-light">
-          返回
+          {t("back")}
         </Link>
       )}
-      <h1>最新产品</h1>
+      <h1 className="mt-3">{t("recent-products")}</h1>
       {loading ? (
         <Loader />
       ) : error ? (

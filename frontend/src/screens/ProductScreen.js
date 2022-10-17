@@ -20,6 +20,9 @@ import {
   createProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const ProductScreen = ({ history, match }) => {
   const { id } = useParams();
@@ -37,6 +40,8 @@ const ProductScreen = ({ history, match }) => {
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate;
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   useEffect(() => {
     if (successProductReview) {
@@ -65,7 +70,7 @@ const ProductScreen = ({ history, match }) => {
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
-        返回
+        {t("back")}
       </Link>
       {loading ? (
         <Loader />
@@ -89,8 +94,12 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>价格: {product.price} ₩</ListGroup.Item>
-                <ListGroup.Item>说明: {product.description}</ListGroup.Item>
+                <ListGroup.Item>
+                  {t("price")}: {product.price} ₩
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  {t("description")}: {product.description}
+                </ListGroup.Item>
               </ListGroup>
             </Col>
             <Col md={3}>
@@ -98,7 +107,7 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup variant="flush">
                   <ListGroupItem>
                     <Row>
-                      <Col>价格:</Col>
+                      <Col>{t("price")} : </Col>
                       <Col>
                         <strong>{product.price} ₩</strong>
                       </Col>
@@ -106,14 +115,14 @@ const ProductScreen = ({ history, match }) => {
                   </ListGroupItem>
                   <ListGroupItem>
                     <Row>
-                      <Col>库存:</Col>
+                      <Col>{t("stock")}:</Col>
                       <Col>{product.countInStock > 0 ? "有货" : "无货"}</Col>
                     </Row>
                   </ListGroupItem>
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
-                        <Col>数量</Col>
+                        <Col>{t("how-qty")}</Col>
                         <Col>
                           <Form.Control
                             as="select"
@@ -135,11 +144,14 @@ const ProductScreen = ({ history, match }) => {
                   <ListGroupItem>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn-block"
+                      className="btn-block mt-3"
                       type="button"
                       disabled={product.countInStock === 0}
+                      style={{
+                        width: "100%",
+                      }}
                     >
-                      加入购物车
+                      {t("add-cart")}
                     </Button>
                   </ListGroupItem>
                 </ListGroup>
@@ -178,8 +190,10 @@ const ProductScreen = ({ history, match }) => {
           </Row>
           <Row>
             <Col md={6}>
-              <h2>评价</h2>
-              {product.reviews.length === 0 && <Message>没有评价</Message>}
+              <h2>{t("review")}</h2>
+              {product.reviews.length === 0 && (
+                <Message>{t("no-review")}</Message>
+              )}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
@@ -190,29 +204,29 @@ const ProductScreen = ({ history, match }) => {
                   </ListGroup.Item>
                 ))}
                 <ListGroup.Item>
-                  <h2>顾客评价</h2>
+                  <h2>{t("customer-review")}</h2>
                   {errorProductReview && (
                     <Message variant="danger">{errorProductReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId="rating">
-                        <Form.Label>打分</Form.Label>
+                        <Form.Label>{t("rating")}</Form.Label>
                         <Form.Control
                           as="select"
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
                         >
-                          <option value="">选择..</option>
-                          <option value="1">1 - 非常差</option>
-                          <option value="2">2 - 差</option>
-                          <option value="3">3 - 一般</option>
-                          <option value="4">4 - 好</option>
-                          <option value="5">5 - 非常好</option>
+                          <option value="">{t("star")}..</option>
+                          <option value="1">1 - {t("star-1")}</option>
+                          <option value="2">2 - {t("star-2")}</option>
+                          <option value="3">3 - {t("star-3")}</option>
+                          <option value="4">4 - {t("star-4")}</option>
+                          <option value="5">5 - {t("star-5")}</option>
                         </Form.Control>
                       </Form.Group>
                       <Form.Group controlId="comment">
-                        <Form.Label>意见</Form.Label>
+                        <Form.Label>{t("opinion")}</Form.Label>
                         <Form.Control
                           as="textarea"
                           row="3"
@@ -221,12 +235,14 @@ const ProductScreen = ({ history, match }) => {
                         ></Form.Control>
                       </Form.Group>
                       <Button type="submit" variant="primary">
-                        提交
+                        {t("submit")}
                       </Button>
                     </Form>
                   ) : (
                     <Message>
                       请<Link to="/login">登陆</Link>写下顾客意见
+                      <br />
+                      작성을 위해 <Link to="/login">로그인</Link>이 필요합니다.
                     </Message>
                   )}
                 </ListGroup.Item>

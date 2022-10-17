@@ -6,8 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const PlaceOrderScreen = ({ history }) => {
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -52,7 +56,7 @@ const PlaceOrderScreen = ({ history }) => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>配送</h2>
+              <h2>{t("shipping")}</h2>
               <p>
                 <strong>地址 : </strong>
                 {cart.shippingAddress.mobile},{cart.shippingAddress.address},{" "}
@@ -61,15 +65,15 @@ const PlaceOrderScreen = ({ history }) => {
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>付款方式</h2>
-              <strong>方法 : </strong>
-              转账
+              <h2>{t("payment-method")}</h2>
+              <strong>{t("method")} : </strong>
+              {t("transfer")}
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>订单汇总</h2>
+              <h2>{t("order-summary")}</h2>
               {cart.cartItems.length === 0 ? (
-                <Message>购物车是空的</Message>
+                <Message>{t("shopping-cart-empty")}</Message>
               ) : (
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
@@ -104,23 +108,23 @@ const PlaceOrderScreen = ({ history }) => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>订单总结</h2>
+                <h2>{t("order-compelete")}</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>价格</Col>
+                  <Col>{t("price")}</Col>
                   <Col>{cart.itemsPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>配送费</Col>
+                  <Col>{t("shipping-fee")}</Col>
                   <Col>{cart.shippingPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>合计</Col>
+                  <Col>{t("total-price")}</Col>
                   <Col>{cart.totalPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
@@ -133,8 +137,9 @@ const PlaceOrderScreen = ({ history }) => {
                   className="btn-block"
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
+                  style={{ width: "100%" }}
                 >
-                  订单完成
+                  {t("order-end")}
                 </Button>
               </ListGroup.Item>
             </ListGroup>

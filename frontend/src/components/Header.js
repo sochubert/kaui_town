@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
 import { useTranslation } from "react-i18next";
@@ -37,7 +37,7 @@ const Header = () => {
               🇰🇷
             </button>
             <button
-              onClick={() => i18n.changeLanguage("ko")}
+              onClick={() => i18n.changeLanguage("cn")}
               className="lang_button"
             >
               🇨🇳
@@ -51,21 +51,20 @@ const Header = () => {
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ms-auto">
               <Nav.Link as={Link} to={"/cart"}>
-                <i className="fas fa-shopping-cart"></i> 购物车
-                {t("hello")}
+                <i className="fas fa-shopping-cart"></i> {t("shopping-cart")}
               </Nav.Link>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
-                    <NavDropdown.Item>简介</NavDropdown.Item>
+                    <NavDropdown.Item>{t("profile")}</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
-                    注销
+                    {t("logout")}
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <Nav.Link as={Link} to={"/login"}>
-                  <i className="fas fa-user"></i> 登录
+                  <i className="fas fa-user"></i> {t("login")}
                 </Nav.Link>
               )}
               {userInfo && userInfo.isSeller && (

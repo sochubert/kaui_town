@@ -4,8 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartActions";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const ShippingScreen = ({ history }) => {
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
+
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
@@ -24,15 +29,13 @@ const ShippingScreen = ({ history }) => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
-      <h1>配送</h1>
-      请务必输入正确的手机号码。目前只运营配送服务,
-      因此通过短信提供配送相关通知。 不输入地址也没关系。
+      <h1>{t("shipping")}</h1>
+      {t("shipping-message")}
       <Form.Group controlId="postalCode">
-        <Form.Label>手机号码</Form.Label>
+        <Form.Label>{t("phone-number")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder="
-            输入手机号码"
+          placeholder={t("phone-number-placeholder")}
           value={mobile}
           required
           onChange={(e) => setMobile(e.target.value)}
@@ -40,27 +43,32 @@ const ShippingScreen = ({ history }) => {
       </Form.Group>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
-          <Form.Label>地址</Form.Label>
+          <Form.Label>{t("address")}</Form.Label>
           <Form.Control
             type="text"
-            placeholder="输入地址"
+            placeholder={t("address-placeholder")}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="city">
-          <Form.Label>城市</Form.Label>
+          <Form.Label>{t("address1")}</Form.Label>
           <Form.Control
             type="text"
-            placeholder="输入城市"
+            placeholder={t("address-placeholder")}
             value={city}
             onChange={(e) => setCity(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
-          继续
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-5 mb-5"
+          style={{ width: "100%" }}
+        >
+          {t("process")}
         </Button>
       </Form>
     </FormContainer>

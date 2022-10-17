@@ -14,6 +14,9 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
 } from "../constants/orderConstants";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -33,6 +36,8 @@ const OrderScreen = ({ match, history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   if (!loading) {
     order.itemsPrice = order.orderItems.reduce(
@@ -114,52 +119,54 @@ const OrderScreen = ({ match, history }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <h1>Order {order._id}</h1>
+      <h1>
+        {t("order-number")} {order._id}
+      </h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>配送</h2>
+              <h2>{t("shipping")}</h2>
               <p>
-                <strong>姓名/昵称: </strong> {order.user.name}
+                <strong>{t("name-or-nickname")}: </strong> {order.user.name}
               </p>
               <p>
-                <strong>邮箱: </strong>{" "}
+                <strong>{t("email")}: </strong>{" "}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
               <p>
-                <strong>地址 : </strong>
+                <strong>{t("address")} : </strong>
                 {order.shippingAddress.mobile} {order.shippingAddress.address},{" "}
                 {order.shippingAddress.city}{" "}
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  配送时间 {order.deliveredAt.substring(0, 10)}
+                  {t("delivered-start")} {order.deliveredAt.substring(0, 10)}
                 </Message>
               ) : (
-                <Message variant="danger">准备发货</Message>
+                <Message variant="danger">{t("delivered-ready")}</Message>
               )}
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>付款方式</h2>
+              <h2>{t("payment-method")}</h2>
               <p>
-                <strong>方式 : </strong>
-                转账
+                <strong>{t("payment-method")} : </strong>
+                {t("transfer")}
               </p>
               {order.isPaid ? (
                 <Message variant="success">
-                  付款时间 {order.paidAt.substring(0, 10)}
+                  {t("paid-time")} {order.paidAt.substring(0, 10)}
                 </Message>
               ) : (
-                <Message variant="danger">结账确认中</Message>
+                <Message variant="danger">{t("paid-checking")}</Message>
               )}
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>订单项目</h2>
+              <h2>{t("order-list")}</h2>
               {order.orderItems.length === 0 ? (
-                <Message>没有订单</Message>
+                <Message>{t("order-empty")}</Message>
               ) : (
                 <ListGroup variant="flush">
                   {order.orderItems.map((item, index) => (
@@ -194,23 +201,23 @@ const OrderScreen = ({ match, history }) => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>订单汇总</h2>
+                <h2>{t("order-summary")}</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>价格</Col>
+                  <Col>{t("price")}</Col>
                   <Col>{order.itemsPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>配送费</Col>
+                  <Col>{t("shipping-fee")}</Col>
                   <Col>{order.shippingPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>合计</Col>
+                  <Col>{t("total-price")}</Col>
                   <Col>{order.totalPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
@@ -244,7 +251,7 @@ const OrderScreen = ({ match, history }) => {
                     className="btn btn-block"
                     onClick={paidHandler}
                   >
-                    강제 결제확인 처리
+                    결제확인 처리
                   </Button>
                 </ListGroup.Item>
               )}
