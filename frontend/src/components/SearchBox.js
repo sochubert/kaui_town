@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 const SearchBox = ({ history }) => {
   const [keyword, setKeyword] = useState("");
@@ -13,6 +14,8 @@ const SearchBox = ({ history }) => {
     }
   };
 
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
+
   return (
     <Form
       onSubmit={submitHandler}
@@ -22,7 +25,7 @@ const SearchBox = ({ history }) => {
         type="text"
         name="q"
         onChange={(e) => setKeyword(e.target.value)}
-        placeholder="搜索产品"
+        placeholder={t("product-search")}
       ></Form.Control>
       <Button type="submit" className="p-3">
         <i class="fa-solid fa-magnifying-glass"></i>

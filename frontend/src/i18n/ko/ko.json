@@ -54,5 +54,12 @@
   "star-4": "좋아요!",
   "star-5": "매우 좋아요!",
   "opinion": "후기",
-  "submit": "작성완료"
+  "submit": "작성완료",
+  "register": "회원가입",
+  "name-placeholder": "이름/닉네임을 입력하세요.",
+  "email-address": "이메일 주소",
+  "password": "비밀번호",
+  "password-placeholder": "비밀번호를 입력하세요.",
+  "password-confirm": "비밀번호 확인",
+  "registered": "이미 회원이신가요?"
 }

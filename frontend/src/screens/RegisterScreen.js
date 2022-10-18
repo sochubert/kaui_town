@@ -6,6 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import { register } from "../actions/userActions";
+import { useTranslation } from "react-i18next";
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -20,6 +21,8 @@ const RegisterScreen = ({ location, history }) => {
   const { loading, error, userInfo } = userRegister;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   useEffect(() => {
     if (userInfo) {
@@ -42,61 +45,67 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <h1>注册</h1>
+      <h1>{t("register")}</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
-          <Form.Label>姓名/昵称</Form.Label>
+          <Form.Label>{t("name-or-nickname")}</Form.Label>
           <Form.Control
             type="name"
-            placeholder="输入姓名"
+            placeholder={t("name-placeholder")}
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="email">
-          <Form.Label>邮箱地址</Form.Label>
+          <Form.Label>{t("email-address")}</Form.Label>
           <Form.Control
             type="email"
-            placeholder="输入邮箱"
+            placeholder={t("email-address")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>密码</Form.Label>
+          <Form.Label>{t("password")}</Form.Label>
           <Form.Control
             type="password"
-            placeholder="输入密码"
+            placeholder={t("password-placeholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
-          <Form.Label>确认密码</Form.Label>
+          <Form.Label>{t("password-confirm")}</Form.Label>
           <Form.Control
             type="password"
-            placeholder="确认密码"
+            placeholder={t("password-confirm")}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
-          注册
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-3"
+          style={{ width: "100%" }}
+        >
+          {t("register")}
         </Button>
       </Form>
 
       <Row className="py-3">
         <Col>
-          有账户?{" "}
+          {t("registered")}
+          {"   "}
           <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            登录
+            {t("login")}
           </Link>
         </Col>
       </Row>

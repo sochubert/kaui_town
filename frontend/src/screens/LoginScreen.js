@@ -6,6 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import { login } from "../actions/userActions";
+import { useTranslation } from "react-i18next";
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ const LoginScreen = ({ location, history }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
@@ -31,40 +34,45 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <h1>登录</h1>
+      <h1>{t("login")}</h1>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
-          <Form.Label>邮箱地址</Form.Label>
+          <Form.Label>{t("email-address")}</Form.Label>
           <Form.Control
             type="email"
-            placeholder="输入邮箱"
+            placeholder={t("email-address")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>密码</Form.Label>
+          <Form.Label>{t("password")}</Form.Label>
           <Form.Control
             type="password"
-            placeholder="输入密码"
+            placeholder={t("password-placeholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
-          登录
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-3"
+          style={{ width: "100%" }}
+        >
+          {t("login")}
         </Button>
       </Form>
 
       <Row className="py-3">
         <Col>
-          新用户?{" "}
+          {t("registered")}{" "}
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            注册
+            {t("login")}
           </Link>
         </Col>
       </Row>

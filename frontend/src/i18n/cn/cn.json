@@ -54,5 +54,13 @@
   "star-4": "好",
   "star-5": "非常好",
   "opinion": "意见",
-  "submit": "提交"
+  "submit": "提交",
+  "register": "注册",
+  "name-placeholder": "输入姓名",
+  "email-address": "邮箱地址",
+  "password": "密码",
+  "password-placeholder": "输入密码",
+  "password-confirm": "确认密码",
+  "registered": "有账户?",
+  "product-search": "搜索产品"
 }
