@@ -30,7 +30,7 @@
   "name-or-nickname": "이름/닉네임",
   "email": "이메일",
   "order-list": "주문품목",
-  "delivered-ready": "배숭 준비중",
+  "delivered-ready": "배송 준비중",
   "delivered-start": "배송 출발일",
   "paid-checking": "결제 확인중",
   "order-empty": "주문 내역이 없습니다.",
@@ -61,5 +61,6 @@
   "password": "비밀번호",
   "password-placeholder": "비밀번호를 입력하세요.",
   "password-confirm": "비밀번호 확인",
-  "registered": "이미 회원이신가요?"
+  "registered": "이미 회원이신가요?",
+  "product-search": "상품 검색"
 }

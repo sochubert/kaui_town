@@ -49,6 +49,20 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
+            <div className="on__pc__lang__btn">
+              <button
+                onClick={() => i18n.changeLanguage("ko")}
+                className="lang_button"
+              >
+                🇰🇷
+              </button>
+              <button
+                onClick={() => i18n.changeLanguage("cn")}
+                className="lang_button"
+              >
+                🇨🇳
+              </button>
+            </div>
             <Nav className="ms-auto">
               <Nav.Link as={Link} to={"/cart"}>
                 <i className="fas fa-shopping-cart"></i> {t("shopping-cart")}

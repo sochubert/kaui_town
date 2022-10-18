@@ -116,7 +116,11 @@ const ProductScreen = ({ history, match }) => {
                   <ListGroupItem>
                     <Row>
                       <Col>{t("stock")}:</Col>
-                      <Col>{product.countInStock > 0 ? "有货" : "无货"}</Col>
+                      <Col>
+                        {product.countInStock > 0
+                          ? t("stock-exist")
+                          : t("stock-not-exist")}
+                      </Col>
                     </Row>
                   </ListGroupItem>
                   {product.countInStock > 0 && (

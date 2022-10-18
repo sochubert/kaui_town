@@ -153,6 +153,8 @@ const OrderScreen = ({ match, history }) => {
               <p>
                 <strong>{t("payment-method")} : </strong>
                 {t("transfer")}
+                <br />
+                입금계좌(收款账户) NH농협은행 302-1715-9713-21
               </p>
               {order.isPaid ? (
                 <Message variant="success">
@@ -221,7 +223,7 @@ const OrderScreen = ({ match, history }) => {
                   <Col>{order.totalPrice} ₩</Col>
                 </Row>
               </ListGroup.Item>
-              {!order.isPaid && (
+              {/* {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
                   {!sdkReady ? (
@@ -230,7 +232,7 @@ const OrderScreen = ({ match, history }) => {
                     <Button onClick={payOrderHandler}>결제하기</Button>
                   )}
                 </ListGroup.Item>
-              )}
+              )} */}
               {loadingDeliver && <Loader />}
               {userInfo && userInfo.isAdmin && !order.isDelivered && (
                 <ListGroup.Item>

@@ -59,6 +59,11 @@ h3 {
   display: none;
 }
 
+.on__pc__lang__btn {
+  display: block;
+  margin-left: 50px;
+}
+
 .lang_button {
   border: 0;
   background: none;
@@ -71,5 +76,8 @@ h3 {
   }
   .on__mobile__lang__btn {
     display: block;
+  }
+  .on__pc__lang__btn {
+    display: none;
   }
 }
