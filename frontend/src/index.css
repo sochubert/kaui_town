@@ -80,4 +80,7 @@ h3 {
   .on__pc__lang__btn {
     display: none;
   }
+  .carousel__product__name {
+    font-size: 0.8rem;
+  }
 }
