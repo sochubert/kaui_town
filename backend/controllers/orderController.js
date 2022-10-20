@@ -145,6 +145,21 @@ const getOrders = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
+// @desc Get order by ID
+// @route GET /api/orders/:id
+// @access Private
+const deleteOrderById = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    await order.remove();
+    res.json({ message: "Order removed" });
+  } else {
+    res.status(404);
+    throw new Error("Order not found.");
+  }
+});
+
 export {
   addOrderItems,
   getOrderById,
@@ -152,4 +167,5 @@ export {
   getMyOrders,
   updateOrderToDelivered,
   getOrders,
+  deleteOrderById,
 };

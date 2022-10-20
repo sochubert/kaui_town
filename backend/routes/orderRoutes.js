@@ -8,6 +8,7 @@ import {
   updateOrderToDelivered,
   getMyOrders,
   getOrders,
+  deleteOrderById,
 } from "../controllers/orderController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -17,6 +18,8 @@ const secretKey = process.env.NICEPAY_SECRET_KEY;
 router.route("/").post(protect, addOrderItems).get(protect, admin, getOrders);
 router.route("/myorders").get(protect, getMyOrders);
 router.route("/:id").get(protect, getOrderById);
+router.route("/:id").delete(protect, deleteOrderById);
+
 router.route("/:id/pay").put(protect, admin, updateOrderToPaid);
 router.route("/nicepay").put(protect, updateOrderToPaid);
 router.get("/nicepay/cancel", function (req, res) {
