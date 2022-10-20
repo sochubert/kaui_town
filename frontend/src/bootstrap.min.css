@@ -2824,7 +2824,7 @@ textarea.form-control.is-invalid {
   font-size: 1rem;
   border-radius: 50rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -2837,14 +2837,8 @@ textarea.form-control.is-invalid {
 .btn-check:focus + .btn,
 .btn:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(55, 141, 252, 0.25);
 }
-.btn-check:active + .btn,
-.btn-check:checked + .btn,
-.btn.active,
-.btn:active {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
+
 .btn-check:active + .btn:focus,
 .btn-check:checked + .btn:focus,
 .btn.active:focus,
@@ -2863,8 +2857,6 @@ fieldset:disabled .btn {
   color: #fff;
   background-color: #378dfc;
   border-color: #378dfc;
-  box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2),
-    -5px -5px 10px rgba(255, 255, 255, 0.4);
 }
 .btn-primary:hover {
   color: #fff;
@@ -3585,9 +3577,6 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: 0 solid transparent;
   border-radius: 0.25rem;
-  box-shadow: 8px 8px 40px rgba(0, 0, 0, 0.15),
-    inset 1px 1px 3px rgba(255, 255, 255, 0.5),
-    inset -5px -5px 20px rgba(0, 0, 0, 0.05);
 }
 .dropdown-menu[data-bs-popper] {
   top: 100%;
@@ -10563,10 +10552,6 @@ fieldset:disabled .btn {
   border-radius: 50rem;
   background-color: white;
   border: none;
-  box-shadow: 5px 5px 10px rgba(55, 94, 148, 0.2),
-    -5px -5px 10px rgba(255, 255, 255, 0.4);
-  transition: background-color 0.15s ease-in-out, border 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 .btn:focus {
   color: #7b8ab8;
