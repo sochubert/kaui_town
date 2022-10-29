@@ -62,5 +62,11 @@
   "password-placeholder": "비밀번호를 입력하세요.",
   "password-confirm": "비밀번호 확인",
   "registered": "이미 회원이신가요?",
-  "product-search": "상품 검색"
+  "product-search": "상품 검색",
+  "won": "원",
+  "account-info": "프로필",
+  "update": "업데이트",
+  "my-order": "내 주문",
+  "date": "날짜",
+  "pay": "결제"
 }

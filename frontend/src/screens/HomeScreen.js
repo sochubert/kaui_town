@@ -48,7 +48,9 @@ const HomeScreen = ({ match }) => {
         <>
           <Row>
             {products.length === 0 ? (
-              <Message variant="danger">查无此物</Message>
+              <Message variant="danger">
+                오류가 발생하였습니다.(查无此物)
+              </Message>
             ) : (
               products.map((product) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

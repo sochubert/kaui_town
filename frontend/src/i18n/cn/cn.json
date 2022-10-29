@@ -62,5 +62,11 @@
   "password-placeholder": "输入密码",
   "password-confirm": "确认密码",
   "registered": "有账户?",
-  "product-search": "搜索产品"
+  "product-search": "搜索产品",
+  "won": "韩元",
+  "account-info": "账户信息",
+  "update": "修改",
+  "my-order": "我的订单",
+  "date": "日期",
+  "pay": "付款"
 }

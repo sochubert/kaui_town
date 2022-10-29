@@ -2,8 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Rating from "./Rating";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const Product = ({ product }) => {
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
+
   return (
     <Card className="my-3 p-3 rounded" border="primary">
       <Link to={`/product/${product._id}`}>
@@ -26,7 +31,10 @@ const Product = ({ product }) => {
           )}
         </Card.Text>
 
-        <Card.Text as="h3">{product.price} 韩元</Card.Text>
+        <Card.Text as="h3">
+          {product.price}
+          {t("won")}
+        </Card.Text>
       </Card.Body>
     </Card>
   );

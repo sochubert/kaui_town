@@ -7,6 +7,9 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
+import { useTranslation } from "react-i18next";
+
+import "../i18n/i18n.js";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -14,6 +17,8 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   const dispatch = useDispatch();
 
@@ -56,14 +61,14 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <Row>
       <Col md={3}>
-        <h2>账户信息</h2>
+        <h2>{t("account-info")}</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
         {success && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name">
-            <Form.Label>姓名/昵称</Form.Label>
+          <Form.Group controlId="name" className="mt-2">
+            <Form.Label>{t("name-or-nickname")}</Form.Label>
             <Form.Control
               type="name"
               placeholder="Enter Name"
@@ -72,8 +77,8 @@ const ProfileScreen = ({ location, history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="email">
-            <Form.Label>邮箱地址</Form.Label>
+          <Form.Group controlId="email" className="mt-2">
+            <Form.Label>{t("email-address")}</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -82,33 +87,38 @@ const ProfileScreen = ({ location, history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="password">
-            <Form.Label>密码</Form.Label>
+          <Form.Group controlId="password" className="mt-2">
+            <Form.Label>{t("password")}</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter password"
+              placeholder={t("password-placeholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="confirmPassword">
-            <Form.Label>确认密码</Form.Label>
+          <Form.Group controlId="confirmPassword" className="mt-2">
+            <Form.Label>{t("password-confirm")}</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Confirm password"
+              placeholder={t("password-confirm")}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary">
-            修改
+          <Button
+            type="submit"
+            variant="primary"
+            className="mt-3 mb-5"
+            style={{ width: "100%" }}
+          >
+            {t("update")}
           </Button>
         </Form>
       </Col>
       <Col md={9}>
-        <h2>我的订单</h2>
+        <h2>{t("my-order")}</h2>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
@@ -117,11 +127,11 @@ const ProfileScreen = ({ location, history }) => {
           <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>订单号码</th>
-                <th>日期</th>
-                <th>合计</th>
-                <th>付款</th>
-                <th>配送</th>
+                <th>{t("order-number")}</th>
+                <th>{t("date")}</th>
+                <th>{t("total")}</th>
+                <th>{t("pay")}</th>
+                <th>{t("shipping")}</th>
                 <th></th>
               </tr>
             </thead>
