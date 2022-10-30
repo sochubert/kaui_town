@@ -7,11 +7,14 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
 import { listProductDetails, updateProduct } from "../actions/productActions";
+import { listSellers } from "../actions/sellerAction";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import Select from "react-select";
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
 
+  const [seller, setSeller] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
@@ -33,6 +36,9 @@ const ProductEditScreen = ({ match, history }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const sellerList = useSelector((state) => state.sellerList);
+  const { loading: loadingSeller, error: errorSeller, sellers } = sellerList;
+
   const productUpdate = useSelector((state) => state.productUpdate);
   const {
     loading: loadingUpdate,
@@ -52,7 +58,9 @@ const ProductEditScreen = ({ match, history }) => {
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
+        dispatch(listSellers());
       } else {
+        setSeller(product.seller);
         setName(product.name);
         setPrice(product.price);
         setImage(product.image);
@@ -67,6 +75,21 @@ const ProductEditScreen = ({ match, history }) => {
       }
     }
   }, [dispatch, history, productId, product, successUpdate]);
+
+  // 판매점 선택
+  const options = [];
+
+  sellers &&
+    sellers.map((seller) =>
+      options.push({
+        value: seller._id,
+        label: seller.name,
+      })
+    );
+
+  const handleSellerChange = (selected) => {
+    setSeller(selected.value);
+  };
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -178,6 +201,7 @@ const ProductEditScreen = ({ match, history }) => {
       updateProduct({
         _id: productId,
         name,
+        seller,
         price,
         image,
         detailImages,
@@ -207,6 +231,15 @@ const ProductEditScreen = ({ match, history }) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <Form onSubmit={submitHandler}>
+            <Form.Group controlId="seller">
+              <Form.Label>판매자</Form.Label>
+              <Select
+                options={options}
+                isSearchable
+                onChange={handleSellerChange}
+              />
+            </Form.Group>
+
             <Form.Group controlId="name">
               <Form.Label>상품명</Form.Label>
               <Form.Control

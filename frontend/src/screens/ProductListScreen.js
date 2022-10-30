@@ -11,6 +11,7 @@ import {
   createProduct,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import SellerName from "../components/SellerName";
 
 const ProductListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -97,6 +98,7 @@ const ProductListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
+                <th>SHOP</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
@@ -108,6 +110,10 @@ const ProductListScreen = ({ history, match }) => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
+                  <td>
+                    {/* <SellerName id={product.seller} /> */}
+                    {product.seller}
+                  </td>
                   <td>{product.price}₩</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
