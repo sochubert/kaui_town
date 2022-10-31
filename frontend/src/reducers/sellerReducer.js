@@ -23,10 +23,10 @@ export const sellerListReducer = (state = { sellers: [] }, action) => {
   }
 };
 
-export const sellerDetailReducer = (state = { seller: {} }, action) => {
+export const sellerDetailReducer = (state = {}, action) => {
   switch (action.type) {
     case SELLER_DETAILS_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
     case SELLER_DETAILS_SUCCESS:
       return {
         loading: false,

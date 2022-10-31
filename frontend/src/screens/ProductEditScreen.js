@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { listProductDetails, updateProduct } from "../actions/productActions";
+import {
+  deleteProduct,
+  listProductDetails,
+  updateProduct,
+} from "../actions/productActions";
 import { listSellers } from "../actions/sellerAction";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import Select from "react-select";
@@ -15,6 +19,7 @@ const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
 
   const [seller, setSeller] = useState("");
+  const [sellerName, setSellerName] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
@@ -61,6 +66,7 @@ const ProductEditScreen = ({ match, history }) => {
         dispatch(listSellers());
       } else {
         setSeller(product.seller);
+        setSellerName(product.sellerName);
         setName(product.name);
         setPrice(product.price);
         setImage(product.image);
@@ -89,6 +95,14 @@ const ProductEditScreen = ({ match, history }) => {
 
   const handleSellerChange = (selected) => {
     setSeller(selected.value);
+    setSellerName(selected.label);
+  };
+
+  const cancelHandler = (id) => {
+    if (window.confirm("정말로 지우겠습니까?")) {
+      dispatch(deleteProduct(id));
+      window.location.href = "/admin/productlist";
+    }
   };
 
   const uploadFileHandler = async (e) => {
@@ -202,6 +216,7 @@ const ProductEditScreen = ({ match, history }) => {
         _id: productId,
         name,
         seller,
+        sellerName,
         price,
         image,
         detailImages,
@@ -221,6 +236,9 @@ const ProductEditScreen = ({ match, history }) => {
       <Link to="/admin/productlist" className="btn btn-light my-3">
         뒤로가기
       </Link>
+      <Button className="mx-3" onClick={() => cancelHandler(product._id)}>
+        상품 생성 취소 또는 상품 지우기
+      </Button>
       <FormContainer>
         <h1>상품 관리</h1>
         {loadingUpdate && <Loader />}

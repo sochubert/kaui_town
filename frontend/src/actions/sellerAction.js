@@ -29,7 +29,7 @@ export const listSellers = () => async (dispatch) => {
 
 export const listSellerDetails = (id) => async (dispatch) => {
   try {
-    dispatch({ type: SELLER_DETAILS_REQUEST });
+    dispatch({ type: SELLER_DETAILS_SUCCESS });
     const { data } = await axios.get(`/api/seller/${id}`);
     dispatch({
       type: SELLER_DETAILS_SUCCESS,

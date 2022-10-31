@@ -110,10 +110,7 @@ const ProductListScreen = ({ history, match }) => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>
-                    {/* <SellerName id={product.seller} /> */}
-                    {product.seller}
-                  </td>
+                  <td>{product.sellerName}</td>
                   <td>{product.price}₩</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>

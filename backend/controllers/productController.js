@@ -59,7 +59,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name: "이름",
-    seller: req.seller._id,
+    seller: "",
+    sellerName: "",
     price: 0,
     user: req.user._id,
     image: "이미지",
@@ -84,6 +85,7 @@ const createProduct = asyncHandler(async (req, res) => {
 const updateProduct = asyncHandler(async (req, res) => {
   const {
     seller,
+    sellerName,
     name,
     price,
     description,
@@ -101,6 +103,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   if (product) {
     product.seller = seller;
+    product.sellerName = sellerName;
     product.name = name;
     product.price = price;
     product.description = description;

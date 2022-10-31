@@ -27,6 +27,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    sellerName: {
+      type: String,
+      required: false,
+    },
     name: {
       type: String,
       required: true,
