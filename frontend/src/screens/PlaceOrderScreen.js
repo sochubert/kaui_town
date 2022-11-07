@@ -24,7 +24,8 @@ const PlaceOrderScreen = ({ history }) => {
   );
 
   // 일정 금액 이상 무료 설정
-  cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 100;
+  // cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 100;
+  cart.shippingPrice = 3100;
   cart.totalPrice = Number(cart.itemsPrice) + Number(cart.shippingPrice);
 
   const orderCreate = useSelector((state) => state.orderCreate);

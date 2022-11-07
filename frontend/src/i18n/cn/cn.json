@@ -11,7 +11,7 @@
   "shipping": "配送",
   "payment": "结账",
   "order-compelete": "订单结束",
-  "shipping-message": "请务必输入正确的手机号码。目前只运营配送服务, 因此通过短信提供配送相关通知。 不输入地址也没关系。",
+  "shipping-message": "请务必输入正确的手机号码。",
   "phone-number": "手机号码",
   "phone-number-placeholder": "输入手机号码",
   "address": "地址",

@@ -11,7 +11,7 @@
   "shipping": "배송",
   "payment": "결제",
   "order-compelete": "주문확인",
-  "shipping-message": "반드시 정확한 휴대폰 번호를 입력해주세요. 현재, 문자를 통해 배송 관련 안내를 드리고 있습니다. 주소는 따로 입력하지 않으셔도 괜찮습니다.",
+  "shipping-message": "반드시 정확한 휴대폰 번호를 입력해주세요.",
   "phone-number": "휴대폰 번호",
   "phone-number-placeholder": "휴대폰 번호를 입력하세요.",
   "address": "상세 주소",
