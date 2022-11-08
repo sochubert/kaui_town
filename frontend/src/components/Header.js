@@ -105,6 +105,9 @@ const Header = () => {
                   <LinkContainer to="/admin/account">
                     <NavDropdown.Item>정산관리</NavDropdown.Item>
                   </LinkContainer>
+                  <LinkContainer to="/admin/carousel">
+                    <NavDropdown.Item>메인화면관리</NavDropdown.Item>
+                  </LinkContainer>
                 </NavDropdown>
               )}
             </Nav>

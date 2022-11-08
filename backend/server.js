@@ -30,7 +30,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/seller", sellerRoutes);
-app.use("/api/carousels", carouselRoutes);
+app.use("/api/carousel", carouselRoutes);
 
 app.get("/api/config/nicepay", (req, res) =>
   res.send(process.env.NICEPAY_CLIENT_ID)

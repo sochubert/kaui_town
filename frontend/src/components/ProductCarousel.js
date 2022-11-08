@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Carousel, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import Message from "./Message";
-import { listTopProducts } from "../actions/productActions";
+import { getCarousel } from "../actions/carouselAction";
 
 const ProductCarousel = () => {
   const dispatch = useDispatch();
 
-  const productTopRated = useSelector((state) => state.productTopRated);
-  const { loading, error, products } = productTopRated;
+  const carouselGet = useSelector((state) => state.carouselGet);
+  const { loading, error, carousels } = carouselGet;
 
   useEffect(() => {
-    dispatch(listTopProducts());
+    dispatch(getCarousel());
   }, [dispatch]);
 
   return loading ? (
@@ -22,14 +21,9 @@ const ProductCarousel = () => {
     <Message variant="danger">{error}</Message>
   ) : (
     <Carousel pause="hover" className="bg-light">
-      {products.map((product) => (
-        <Carousel.Item key={product._id}>
-          <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
-            <Carousel.Caption className="carousel-caption">
-              <h3 className="carousel__product__name">{product.name}</h3>
-            </Carousel.Caption>
-          </Link>
+      {carousels.map((carousel) => (
+        <Carousel.Item key={carousel._id}>
+          <Image src={carousel.image} alt="main-img" fluid />
         </Carousel.Item>
       ))}
     </Carousel>

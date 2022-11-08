@@ -30,6 +30,11 @@ import {
 } from "./reducers/orderReducer";
 import { sellerListReducer } from "./reducers/sellerReducer";
 import { listSellerDetails } from "./actions/sellerAction";
+import {
+  carouselCreateReducer,
+  carouselGetReducer,
+  carouselDeleteReducer,
+} from "./reducers/carouselReducer";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -55,6 +60,9 @@ const reducer = combineReducers({
   orderList: orderListReducer,
   sellerList: sellerListReducer,
   sellerDetails: listSellerDetails,
+  carouselCreate: carouselCreateReducer,
+  carouselGet: carouselGetReducer,
+  carouselDelete: carouselDeleteReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
