@@ -11,6 +11,7 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import sellerRoutes from "./routes/sellerRoutes.js";
+import carouselRoutes from "./routes/carouselRoutes.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/seller", sellerRoutes);
+app.use("/api/carousels", carouselRoutes);
 
 app.get("/api/config/nicepay", (req, res) =>
   res.send(process.env.NICEPAY_CLIENT_ID)
