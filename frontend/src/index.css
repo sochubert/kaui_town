@@ -40,11 +40,11 @@ h3 {
 }
 
 .carousel img {
-  height: 300px;
-  padding: 15px;
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  height: 100%;
+  /* padding: 15px; */
+  /* margin-bottom: 20px; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
 }
 .carousel a {
   margin: 0 auto;
