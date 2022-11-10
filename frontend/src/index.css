@@ -40,11 +40,11 @@ h3 {
 }
 
 .carousel img {
-  height: 100%;
-  /* padding: 15px; */
-  /* margin-bottom: 20px; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
+  height: 400px;
+  padding: 15px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .carousel a {
   margin: 0 auto;
@@ -81,5 +81,12 @@ h3 {
   }
   .carousel__product__name {
     font-size: 0.8rem;
+  }
+  .carousel img {
+    height: 100%;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
